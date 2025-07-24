@@ -1,0 +1,58 @@
+services:
+  db:
+    image: postgres:14
+    container_name: ecommerce
+    restart: always
+    environment:
+      POSTGRES_USER: ecommerce_user
+      POSTGRES_PASSWORD: ecommerce_password
+      POSTGRES_DB: ecommerce_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./sql/create_tables/create_tbs.sql:/docker-entrypoint-initdb.d/create_tbs.sql
+    networks:
+      - ecommerce_network
+  
+  app:
+    container_name: data_generation
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    depends_on:
+      - db
+    environment:
+      DB_USER: ecommerce_user
+      DB_PASSWORD: ecommerce_password
+      DB_NAME: ecommerce_db
+      DB_HOST: db
+    command: ["bash", "-c", "/wait_for_it.sh db:5432 -- python scripts/data_generation/load_data_table.py"]
+    volumes:
+      - .:/app
+    networks:
+      - ecommerce_network
+
+  test_runner:
+    container_name: test_data_quality
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    depends_on:
+      - db
+      - app
+    environment:
+      DB_USER: ecommerce_user
+      DB_PASSWORD: ecommerce_password
+      DB_NAME: ecommerce_db
+      DB_HOST: db
+    volumes:
+      - .:/app
+    networks:
+      - ecommerce_network
+    command: ["bash", "-c", "/wait_for_it.sh db:5432 -- sleep 5 && pytest tests/"]
+
+volumes:
+  db_data:
+networks:
+  ecommerce_network:

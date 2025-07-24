@@ -1,0 +1,5 @@
+sqlalchemy
+psycopg2-binary
+faker
+dbt-postgres
+pytest
