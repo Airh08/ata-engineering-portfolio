@@ -41,6 +41,10 @@ Modelo en estrella compuesto por:
 > - ¿Qué tiendas tienen mayor rendimiento?
 > - ¿Cómo varían las ventas por fecha o categoría?
 
+
+### 📐 Diagrama del Modelo Estrella
+
+![Modelo Estrella](docs/modelo_estrella.png)
 ---
 
 ## 📈 Tareas Realizadas
