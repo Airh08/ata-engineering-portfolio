@@ -1,39 +1,3 @@
-<style>
-body {
-  background-color: #0e1117;
-  color: #c9d1d9;
-  font-family: 'Fira Code', 'Courier New', monospace;
-  line-height: 1.6;
-  padding: 2rem;
-}
-h1, h2, h3 {
-  color: #58a6ff;
-  border-bottom: 1px solid #30363d;
-  padding-bottom: 0.3rem;
-}
-code, pre {
-  background-color: #161b22;
-  padding: 0.2rem 0.4rem;
-  border-radius: 6px;
-  font-family: 'Fira Code', monospace;
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-th, td {
-  border: 1px solid #30363d;
-  padding: 0.5rem;
-  text-align: left;
-}
-a {
-  color: #58a6ff;
-}
-hr {
-  border: 1px solid #30363d;
-}
-</style>
-
 # 🏪 E-commerce Analytics Warehouse
 
 > **📦 Data Engineering Portfolio Project**  
